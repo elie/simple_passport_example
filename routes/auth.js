@@ -18,16 +18,16 @@ passport.use(new LocalStrategy({
   knex('users').where("username", username).first().then(user => {
     if(!user){
       // SEND A FLASH MESSAGE SAYING INVALID USERNAME
-      return done(null,false, {message: "Invalid credentials"})
+      return done(null,false)
     }
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if(!isMatch){
         // SEND A FLASH MESSAGE SAYING INVALID PASSWORD
-        return done(null,false, {message: "Invalid credentials"})
+        return done(null,false)
       }
       else {
         // SEND A FLASH MESSAGE SAYING SUCCESSFULLY LOGGED IN!
-        return done(null,user, {message: "Welcome back!"})
+        return done(null,user)
       }
     })
   }).catch(err => {
@@ -60,8 +60,8 @@ router.post('/login',
     {
       successRedirect: '/users',
       failureRedirect: '/auth/login',
-      failureFlash: true,
-      successFlash: true,
+      failureFlash: "Invalid credentials",
+      successFlash: "Welcome back!",
     }
   ));
 

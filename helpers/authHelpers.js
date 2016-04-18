@@ -3,8 +3,7 @@ exports.ensureAuthenticated = (req,res,next) => {
     return next()
   }
   else {
-    // GOOD TIME FOR A FLASH MESSAGE
-    req.flash('loginError','Please log in first')
+    req.flash('error','Please log in first')
     return res.redirect('/auth/login')
   }
 }

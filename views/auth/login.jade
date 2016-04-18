@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   if(message)
-    h1= JSON.stringify(message)
+    h1= message
   span Don't have an account? Sign up &nbsp;
     a(href="/users/new") here
   h1 Login a user:
